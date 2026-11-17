@@ -1,0 +1,123 @@
+---
+import '../styles/global.css';
+import { STUDIO_INFO } from '../data/siteData';
+import { generateSchemaLD } from '../lib/schema';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = `${STUDIO_INFO.name} — Atelier de thumbnails para YouTube`,
+  description = 'Atelier de direção de arte que pinta thumbnails 3D para criadores de Roblox, Minecraft e Variety Games. Cor, expressão e leitura instantânea no feed.',
+  image = '/thumbs/roblox-rainbow-friends.webp',
+} = Astro.props;
+
+const canonicalUrl = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : undefined;
+---
+
+<!doctype html>
+<html lang="pt-BR" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#050506" />
+    <meta name="color-scheme" content="dark" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <script is:inline>
+      document.documentElement.classList.replace('no-js', 'js');
+    </script>
+
+    <!-- LCP: logotipo cromado -->
+    <link
+      rel="preload"
+      as="image"
+      href="/y2k/logo-sm.webp"
+      imagesrcset="/y2k/logo-sm.webp 760w, /y2k/logo.webp 1462w"
+      imagesizes="(min-width: 1024px) 900px, 92vw"
+      fetchpriority="high"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap"
+    />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={STUDIO_INFO.name} />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content={STUDIO_INFO.twitterHandle} />
+    <script type="application/ld+json" set:html={generateSchemaLD()} />
+  </head>
+  <body class="min-h-screen bg-transparent text-ink-200 antialiased">
+    <a
+      href="#conteudo"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[70] focus:px-4 focus:py-2.5 focus:rounded-full focus:bg-flame-500 focus:text-white focus:text-sm focus:font-semibold"
+    >
+      Ir para o conteúdo
+    </a>
+
+    <div class="grain" aria-hidden="true"></div>
+    <div class="space-bg" aria-hidden="true" style="--lqip:url(data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAAAQAwCdASoYACkAPu1yslOppqSoJWgBMB2JaQAAKVJt9gAA/vB0c5KGyCAizDxK0G1+piCo60noAAAA)">
+      <img src="/y2k/bg-sm.webp" srcset="/y2k/bg-sm.webp 1280w, /y2k/bg.webp 2560w" sizes="100vw" alt="" decoding="async" fetchpriority="low" />
+    </div>
+
+    <slot />
+
+    <script>
+      // 1. Imagens: revela com blur-up quando decodificada
+      const frames = document.querySelectorAll<HTMLElement>('.art-frame');
+      frames.forEach((frame) => {
+        const img = frame.querySelector('img');
+        if (!img) return;
+        const done = () => frame.classList.add('is-loaded');
+        if (img.complete && img.naturalWidth > 0) done();
+        else {
+          img.addEventListener('load', done, { once: true });
+          img.addEventListener('error', done, { once: true });
+        }
+      });
+
+      // 2. Reveals de scroll (uma vez só)
+      const nodes = document.querySelectorAll<HTMLElement>('[data-reveal]');
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add('is-in');
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { rootMargin: '0px 0px -8% 0px', threshold: 0.12 }
+        );
+        nodes.forEach((n) => io.observe(n));
+      } else {
+        nodes.forEach((n) => n.classList.add('is-in'));
+      }
+
+      // 3. Marquees param quando fora da tela (economia de bateria no celular)
+      const wraps = document.querySelectorAll<HTMLElement>('.marquee-wrap');
+      if ('IntersectionObserver' in window) {
+        const mo = new IntersectionObserver((entries) => {
+          entries.forEach((e) => e.target.classList.toggle('is-paused', !e.isIntersecting));
+        });
+        wraps.forEach((w) => mo.observe(w));
+      }
+
+    </script>
+  </body>
+</html>

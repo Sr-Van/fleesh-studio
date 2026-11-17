@@ -1,0 +1,38 @@
+---
+import { PORTFOLIO_ITEMS } from '../data/siteData';
+
+const words = ['Cor', 'Expressão', 'Luz de recorte', 'Drama', 'Contraste', 'Narrativa', 'Escala', 'Caos controlado'];
+const rowA = PORTFOLIO_ITEMS.slice(4, 13);
+const rowB = PORTFOLIO_ITEMS.slice(13);
+---
+
+<section aria-label="Manifesto em movimento" class="relative py-10 sm:py-14 border-y border-white/5 overflow-hidden">
+  <!-- Palavras -->
+  <div class="marquee-wrap" aria-hidden="true">
+    <div class="marquee" style="--speed:40s">
+      {[0, 1].map(() => (
+        <div class="flex shrink-0 items-center">
+          {words.map((w, i) => (
+            <span class="flex items-center font-display font-extrabold text-[clamp(2.4rem,8vw,5.5rem)] leading-none tracking-[-0.04em] px-5 sm:px-8">
+              <span class={i % 2 ? 'text-outline' : 'text-ink-50'}>{w}</span>
+              <span class="ml-10 sm:ml-16 text-flame-500 text-[0.5em]">✦</span>
+            </span>
+          ))}
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Duas fitas de capas em sentidos opostos -->
+  {[rowA, rowB].map((row, r) => (
+    <div class="marquee-wrap mt-6 sm:mt-8 -rotate-1" aria-hidden="true">
+      <div class="marquee" data-dir={r ? 'rev' : undefined} style={`--speed:${r ? 75 : 65}s`}>
+        {[...row, ...row].map((item) => (
+          <div class="art-frame shrink-0 mr-3 sm:mr-4 w-56 sm:w-72 aspect-video rounded-xl ring-1 ring-white/10" style={`--tone:${item.dominantPalette}`}>
+            <img src={item.thumbSrc} alt="" width="640" height="360" loading="lazy" decoding="async" class="w-full h-full object-cover" />
+          </div>
+        ))}
+      </div>
+    </div>
+  ))}
+</section>

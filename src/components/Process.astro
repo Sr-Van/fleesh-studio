@@ -1,0 +1,85 @@
+---
+import { WORKFLOW_STEPS, FEED_SIMULATOR_DATA } from '../data/siteData';
+
+const study = FEED_SIMULATOR_DATA[0];
+const notes = [
+  { k: 'Foco', v: study.focalNote },
+  { k: 'Separação', v: study.separationNote },
+  { k: 'Zona segura', v: study.safeZoneNote },
+];
+---
+
+<section id="processo" class="relative py-20 sm:py-28 bg-black/50 backdrop-blur-sm border-y border-white/5">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <p data-reveal class="font-mono text-xs uppercase tracking-[0.2em] text-flame-500">✦ Do esboço ao feed</p>
+    <h2 data-reveal="mask" class="mt-4 max-w-4xl font-display font-extrabold tracking-[-0.04em] leading-[0.95] text-[clamp(2.3rem,7vw,4.8rem)]">
+      Uma pintura com <span class="font-serif italic font-normal chrome-text">um segundo</span> para convencer.
+    </h2>
+
+    <div class="mt-14 grid lg:grid-cols-12 gap-12 lg:gap-10">
+      <!-- Estudo de composição -->
+      <div class="lg:col-span-7 lg:sticky lg:top-24 self-start">
+        <figure data-reveal="wipe" class="relative">
+          <div class="art-frame aspect-video rounded-2xl ring-1 ring-white/10" style={`--tone:#8358FF`} data-study>
+            <img src={study.thumbSrc} srcset={`${study.thumbSrc} 640w, ${study.src} 1280w`} sizes="(min-width:1024px) 640px, 92vw" width="640" height="360" alt={`Estudo de composição: ${study.videoTitle}`} loading="lazy" decoding="async" class="w-full h-full object-cover" />
+
+            <!-- Camadas do raio-x -->
+            <svg class="xray absolute inset-0 w-full h-full" viewBox="0 0 160 90" preserveAspectRatio="none" aria-hidden="true">
+              <g stroke="#F5F4F0" stroke-width="0.25" stroke-dasharray="1.5 1.5" opacity="0.8">
+                <line x1="53.3" y1="0" x2="53.3" y2="90" /><line x1="106.6" y1="0" x2="106.6" y2="90" />
+                <line x1="0" y1="30" x2="160" y2="30" /><line x1="0" y1="60" x2="160" y2="60" />
+              </g>
+              <circle cx="53.3" cy="30" r="9" fill="none" stroke="#B9F2FF" stroke-width="0.7" class="xray-pulse" />
+              <rect x="128" y="77" width="28" height="10" rx="1.5" fill="#B9F2FF" fill-opacity="0.25" stroke="#B9F2FF" stroke-width="0.4" />
+            </svg>
+            <span class="xray absolute bottom-2 right-2 rounded bg-black/85 px-1.5 py-0.5 font-mono text-[11px] font-bold text-white tnum">{study.duration}</span>
+          </div>
+          <figcaption class="mt-4 flex flex-wrap items-center justify-between gap-3">
+            <span class="font-mono text-[11px] uppercase tracking-widest text-ink-400">Estudo · {study.categoryLabel}</span>
+            <button type="button" data-xray-toggle aria-pressed="true" class="inline-flex items-center gap-2 min-h-[40px] px-4 rounded-full border border-white/15 text-sm font-semibold text-ink-50 hover:border-flame-500 transition-colors">
+              <span class="w-2 h-2 rounded-full bg-flame-500"></span> Raio-X <span data-xray-label>ligado</span>
+            </button>
+          </figcaption>
+          <dl class="mt-5 grid sm:grid-cols-3 gap-4">
+            {notes.map((n) => (
+              <div class="border-l-2 border-flame-500/70 pl-3">
+                <dt class="font-mono text-[10px] uppercase tracking-widest text-flame-500">{n.k}</dt>
+                <dd class="mt-1 text-sm leading-snug text-ink-200">{n.v}</dd>
+              </div>
+            ))}
+          </dl>
+        </figure>
+      </div>
+
+      <!-- Capítulos -->
+      <ol class="lg:col-span-5 space-y-12">
+        {WORKFLOW_STEPS.map((s, i) => (
+          <li data-reveal class="relative pl-16 sm:pl-20" style={`--d:${i * 120}ms`}>
+            <span class="absolute left-0 -top-2 font-display font-extrabold text-5xl sm:text-6xl leading-none text-outline">{s.stepNumber}</span>
+            <h3 class="font-display text-xl sm:text-2xl font-bold tracking-tight">{s.title}</h3>
+            <p class="mt-2 text-ink-200 leading-relaxed">{s.description}</p>
+            <p class="mt-3 inline-block rounded-full bg-white/5 px-3 py-1 font-mono text-[11px] text-amber-400">{s.meta}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .xray { transition: opacity 500ms cubic-bezier(0.16, 1, 0.3, 1); }
+  [data-study].xray-off .xray { opacity: 0; }
+  .xray-pulse { transform-origin: 53.3px 30px; animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 50% { transform: scale(1.25); opacity: 0.4; } }
+</style>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('[data-xray-toggle]');
+  const study = document.querySelector<HTMLElement>('[data-study]');
+  btn?.addEventListener('click', () => {
+    const on = btn.getAttribute('aria-pressed') !== 'true';
+    btn.setAttribute('aria-pressed', String(on));
+    study?.classList.toggle('xray-off', !on);
+    btn.querySelector('[data-xray-label]')!.textContent = on ? 'ligado' : 'desligado';
+  });
+</script>

@@ -1,0 +1,74 @@
+---
+import Icon from './Icon.astro';
+import { STUDIO_INFO, buildWhatsAppUrl } from '../data/siteData';
+
+const links = [
+  { label: 'Discord', value: STUDIO_INFO.discordHandle, icon: 'discord' as const, href: null },
+  { label: 'Twitter / X', value: STUDIO_INFO.twitterHandle, icon: 'twitter' as const, href: STUDIO_INFO.twitterUrl },
+  { label: 'Behance', value: 'Portfólio completo', icon: 'behance' as const, href: STUDIO_INFO.behanceMainUrl },
+  { label: 'WhatsApp', value: STUDIO_INFO.whatsappFormatted, icon: 'whatsapp' as const, href: buildWhatsAppUrl() },
+];
+---
+
+<section id="contato" class="relative isolate overflow-hidden pt-28 sm:pt-36 pb-10 text-center">
+  <div aria-hidden="true" class="absolute inset-x-0 bottom-0 -z-10 h-[70%] bg-[radial-gradient(ellipse_at_bottom,rgba(131,88,255,0.35),transparent_65%)]"></div>
+
+  <div class="mx-auto max-w-5xl px-4 sm:px-6">
+    <img data-reveal src="/y2k/star.webp" alt="" aria-hidden="true" width="176" height="163" loading="lazy" class="mx-auto w-14 sparkle" style="--t:3s" />
+    <h2 data-reveal="mask" class="mt-6 font-display font-extrabold tracking-[-0.04em] leading-[0.95] text-[clamp(2.2rem,9vw,6rem)]">
+      <span class="chrome-text">Vamos criar</span><br />algo <span class="font-serif italic font-normal text-flame-500 glow">absurdo.</span>
+    </h2>
+
+    <button
+      type="button"
+      data-copy-email
+      data-reveal
+      class="mt-10 inline-flex items-center gap-3 min-h-[52px] px-6 rounded-full y2k-border bg-white/[0.03] backdrop-blur text-ink-50 font-mono text-sm sm:text-base hover:bg-white/[0.07] transition-colors"
+      style="--d:150ms"
+    >
+      <Icon name="mail" class="w-4 h-4" />
+      <span data-copy-label>{STUDIO_INFO.email}</span>
+      <Icon name="copy" class="w-4 h-4 text-ink-400" />
+    </button>
+
+    <ul class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-3 text-left">
+      {links.map((l, i) => {
+        const Tag = l.href ? 'a' : 'div';
+        return (
+          <li data-reveal style={`--d:${200 + i * 80}ms`}>
+            <Tag
+              {...(l.href ? { href: l.href, target: '_blank', rel: 'noopener noreferrer' } : {})}
+              class="group flex h-full flex-col gap-6 rounded-2xl y2k-border bg-white/[0.02] p-4 hover:bg-flame-500/10 transition-colors"
+            >
+              <Icon name={l.icon} class="w-5 h-5 text-ink-50 group-hover:text-flame-500 transition-colors" />
+              <span>
+                <span class="block font-mono text-[10px] uppercase tracking-widest text-ink-400">{l.label}</span>
+                <span class="block mt-1 text-sm font-semibold text-ink-50 truncate">{l.value}</span>
+              </span>
+            </Tag>
+          </li>
+        );
+      })}
+    </ul>
+
+    <p class="mt-20 flex flex-wrap justify-between gap-2 font-mono text-[11px] uppercase tracking-widest text-ink-400">
+      <span>© {STUDIO_INFO.copyrightYear} Fleesh Studios</span>
+      <span>✦ made in 16:9 ✦</span>
+    </p>
+  </div>
+</section>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('[data-copy-email]');
+  const label = btn?.querySelector('[data-copy-label]');
+  const email = label?.textContent || '';
+  btn?.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(email);
+      label!.textContent = 'copiado ✦';
+      setTimeout(() => (label!.textContent = email), 1600);
+    } catch {
+      window.location.href = `mailto:${email}`;
+    }
+  });
+</script>

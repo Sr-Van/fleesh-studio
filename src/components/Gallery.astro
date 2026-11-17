@@ -1,0 +1,284 @@
+---
+import Icon from './Icon.astro';
+import { PORTFOLIO_ITEMS, STUDIO_INFO, buildWhatsAppUrl } from '../data/siteData';
+
+const filters = [
+  { id: 'all', label: 'Todas', count: PORTFOLIO_ITEMS.length },
+  { id: 'roblox', label: 'Roblox', count: PORTFOLIO_ITEMS.filter((i) => i.category === 'roblox').length },
+  { id: 'minecraft', label: 'Minecraft', count: PORTFOLIO_ITEMS.filter((i) => i.category === 'minecraft').length },
+  { id: 'variety', label: 'Variety', count: PORTFOLIO_ITEMS.filter((i) => i.category === 'variety').length },
+];
+
+// Ritmo editorial: algumas obras ganham parede inteira
+const isHero = (i: number) => i % 7 === 0;
+
+const lightboxData = PORTFOLIO_ITEMS.map((i, idx) => ({
+  id: i.id,
+  n: String(idx + 1).padStart(2, '0'),
+  title: i.title,
+  cat: i.categoryLabel,
+  src: i.src,
+  alt: i.alt,
+  tone: i.dominantPalette,
+  technique: i.contrastFocus,
+  wa: buildWhatsAppUrl(i.whatsappPrompt),
+}));
+---
+
+<section id="galeria" class="relative py-20 sm:py-28">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+      <div>
+        <p data-reveal class="font-mono text-xs uppercase tracking-[0.2em] text-flame-500 glow">✦ Exposição permanente</p>
+        <h2 data-reveal="mask" class="mt-4 font-display font-extrabold tracking-[-0.04em] leading-[0.92] text-[clamp(2.4rem,9vw,5.5rem)]">
+          A galeria<span class="font-serif italic font-normal chrome-text"> viva.</span>
+        </h2>
+      </div>
+      <p data-reveal class="max-w-sm text-ink-200 leading-relaxed" style="--d:120ms">
+        Vinte e duas obras feitas para disputar atenção no feed. Toque em qualquer uma para ver em tela cheia e a técnica por trás.
+      </p>
+    </div>
+
+    <!-- Filtros -->
+    <div data-reveal class="mt-10 -mx-4 px-4 overflow-x-auto no-scrollbar" style="--d:200ms">
+      <div class="flex gap-2 w-max" role="group" aria-label="Filtrar obras por jogo">
+        {filters.map((f, i) => (
+          <button
+            type="button"
+            data-filter={f.id}
+            aria-pressed={i === 0 ? 'true' : 'false'}
+            class="filter-chip inline-flex items-center gap-2 min-h-[44px] px-4 rounded-full border border-white/10 text-sm font-semibold text-ink-200 transition-colors duration-300"
+          >
+            {f.label}
+            <sup class="font-mono text-[10px] text-ink-400 tnum">{String(f.count).padStart(2, '0')}</sup>
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- Parede de obras -->
+    <ul class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8 sm:gap-y-10 [grid-auto-flow:dense]" data-wall>
+      {PORTFOLIO_ITEMS.map((item, idx) => (
+        <li
+          class={`piece-li ${isHero(idx) ? 'sm:col-span-2 lg:row-span-2' : ''}`}
+          data-cat={item.category}
+          data-reveal
+          style={`--d:${(idx % 3) * 90}ms`}
+        >
+          <button
+            type="button"
+            data-open-piece={item.id}
+            data-cursor="Ver"
+            class="piece group relative isolate block w-full text-left"
+            style={`--tone:${item.dominantPalette}`}
+            aria-label={`Abrir obra ${idx + 1}: ${item.title}`}
+          >
+            <div class="art-frame aspect-video rounded-2xl ring-1 ring-white/10 group-hover:ring-white/25 transition-shadow" style={`--tone:${item.dominantPalette}`}>
+              <img
+                src={item.thumbSrc}
+                srcset={`${item.thumbSrc} 640w, ${item.src} 1280w`}
+                sizes={isHero(idx) ? '(min-width: 1024px) 760px, (min-width: 640px) 92vw, 92vw' : '(min-width: 1024px) 370px, (min-width: 640px) 46vw, 92vw'}
+                width="640"
+                height="360"
+                alt={item.alt}
+                loading="lazy"
+                decoding="async"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="mt-3 flex items-start justify-between gap-4">
+              <div class="min-w-0">
+                <p class="font-mono text-[11px] uppercase tracking-widest text-ink-400">
+                  Nº {String(idx + 1).padStart(2, '0')} · <span style={`color:${item.dominantPalette}`}>{item.categoryLabel}</span>
+                </p>
+                <h3 class={`mt-1 font-display font-bold tracking-tight text-ink-50 ${isHero(idx) ? 'text-xl sm:text-2xl' : 'text-lg'}`}>
+                  {item.title}
+                </h3>
+                {isHero(idx) && <p class="mt-1 text-sm text-ink-400">{item.contrastFocus}</p>}
+              </div>
+              <span class="mt-1 grid place-items-center shrink-0 w-9 h-9 rounded-full border border-white/10 text-ink-200 group-hover:bg-flame-500 group-hover:border-flame-500 group-hover:text-white transition-colors duration-300">
+                <Icon name="arrow-up-right" class="w-4 h-4" />
+              </span>
+            </div>
+          </button>
+        </li>
+      ))}
+    </ul>
+
+    <div data-reveal class="mt-14 flex flex-wrap items-center gap-3 text-sm">
+      <span class="text-ink-400">Coleções completas no Behance:</span>
+      {STUDIO_INFO.behanceCollections.map((c) => (
+        <a href={c.url} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 min-h-[40px] px-3.5 rounded-full border border-white/10 text-ink-50 hover:border-flame-500 transition-colors">
+          {c.label} <Icon name="arrow-up-right" class="w-3.5 h-3.5" />
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<dialog class="lightbox" aria-label="Visualizador de obra" data-lightbox>
+  <div class="lb-stage relative h-full w-full flex flex-col" data-lb-stage>
+    <div class="flex items-center justify-between gap-3 px-4 sm:px-6 pt-[max(1rem,env(safe-area-inset-top))]">
+      <p class="font-mono text-xs text-ink-400 tnum"><span data-lb-n class="text-ink-50">01</span> / {String(PORTFOLIO_ITEMS.length).padStart(2, '0')}</p>
+      <button type="button" class="grid place-items-center w-11 h-11 rounded-full bg-white/10 text-ink-50 hover:bg-white/20" aria-label="Fechar" data-lb-close>
+        <Icon name="close" class="w-5 h-5" />
+      </button>
+    </div>
+
+    <div class="relative flex-1 flex items-center justify-center px-2 sm:px-16 min-h-0">
+      <div class="absolute inset-0 m-auto w-2/3 h-1/2 rounded-full blur-[100px] opacity-40 transition-colors duration-700" data-lb-glow aria-hidden="true"></div>
+      <div class="art-frame relative w-full max-w-5xl aspect-video rounded-xl sm:rounded-2xl shadow-[0_40px_80px_-20px_rgba(0,0,0,0.9)]" data-lb-frame>
+        <img data-lb-img src="" alt="" width="1280" height="720" decoding="async" class="w-full h-full object-cover" />
+      </div>
+      <button type="button" class="hidden sm:grid absolute left-3 place-items-center w-12 h-12 rounded-full bg-white/10 text-ink-50 hover:bg-flame-500" aria-label="Obra anterior" data-lb-prev>
+        <Icon name="chevron-left" class="w-5 h-5" />
+      </button>
+      <button type="button" class="hidden sm:grid absolute right-3 place-items-center w-12 h-12 rounded-full bg-white/10 text-ink-50 hover:bg-flame-500" aria-label="Próxima obra" data-lb-next>
+        <Icon name="chevron-right" class="w-5 h-5" />
+      </button>
+    </div>
+
+    <div class="mx-auto w-full max-w-5xl px-4 sm:px-6 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-5 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+      <div class="min-w-0">
+        <p class="font-mono text-[11px] uppercase tracking-widest" data-lb-cat></p>
+        <h3 class="mt-1 font-display text-2xl sm:text-3xl font-bold tracking-tight" data-lb-title></h3>
+        <p class="mt-1 text-sm text-ink-200"><span class="text-ink-400">Técnica:</span> <span data-lb-tech></span></p>
+      </div>
+      <div class="flex gap-2">
+        <button type="button" class="sm:hidden grid place-items-center w-14 h-14 shrink-0 rounded-full bg-white/10 text-ink-50" aria-label="Obra anterior" data-lb-prev>
+          <Icon name="chevron-left" class="w-5 h-5" />
+        </button>
+        <a data-lb-wa href="#" target="_blank" rel="noopener noreferrer" class="flex-1 inline-flex items-center justify-center gap-2 min-h-[56px] px-6 rounded-full y2k-border text-ink-200 hover:text-ink-50 text-sm whitespace-nowrap">
+          Quero algo assim <Icon name="arrow-up-right" class="w-4 h-4" />
+        </a>
+        <button type="button" class="sm:hidden grid place-items-center w-14 h-14 shrink-0 rounded-full bg-white/10 text-ink-50" aria-label="Próxima obra" data-lb-next>
+          <Icon name="chevron-right" class="w-5 h-5" />
+        </button>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<script type="application/json" id="lb-data" set:html={JSON.stringify(lightboxData)} />
+
+<style>
+  .filter-chip[aria-pressed='true'] {
+    background: #f5f4f0;
+    border-color: #f5f4f0;
+    color: #0b0b0d;
+  }
+  .filter-chip[aria-pressed='true'] sup { color: #8358ff; }
+  .piece-li.is-hidden { display: none; }
+  .piece-li.is-pop { animation: pop 600ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+  @keyframes pop {
+    from { opacity: 0; transform: translateY(18px) scale(0.98); }
+    to { opacity: 1; transform: none; }
+  }
+</style>
+
+<script>
+  type Piece = { id: string; n: string; title: string; cat: string; src: string; alt: string; tone: string; technique: string; wa: string };
+  const data: Piece[] = JSON.parse(document.getElementById('lb-data')!.textContent || '[]');
+
+  // ---------- Filtros ----------
+  const chips = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+  const items = document.querySelectorAll<HTMLElement>('.piece-li');
+  chips.forEach((chip) =>
+    chip.addEventListener('click', () => {
+      const f = chip.dataset.filter;
+      chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+      items.forEach((li) => {
+        const show = f === 'all' || li.dataset.cat === f;
+        li.classList.toggle('is-hidden', !show);
+        li.classList.remove('is-pop');
+        if (show) {
+          li.classList.add('is-in');
+          void li.offsetWidth;
+          li.classList.add('is-pop');
+        }
+      });
+    })
+  );
+
+  // ---------- Lightbox ----------
+  const dlg = document.querySelector<HTMLDialogElement>('[data-lightbox]')!;
+  const img = dlg.querySelector<HTMLImageElement>('[data-lb-img]')!;
+  const frame = dlg.querySelector<HTMLElement>('[data-lb-frame]')!;
+  const glow = dlg.querySelector<HTMLElement>('[data-lb-glow]')!;
+  const $ = (s: string) => dlg.querySelector<HTMLElement>(s)!;
+  let current = 0;
+  let opener: HTMLElement | null = null;
+
+  const visibleIds = () =>
+    Array.from(items)
+      .filter((li) => !li.classList.contains('is-hidden'))
+      .map((li) => li.querySelector<HTMLElement>('[data-open-piece]')!.dataset.openPiece!);
+
+  const show = (idx: number) => {
+    current = (idx + data.length) % data.length;
+    const p = data[current];
+    frame.classList.remove('is-loaded');
+    img.onload = () => frame.classList.add('is-loaded');
+    img.src = p.src;
+    img.alt = p.alt;
+    if (img.complete) frame.classList.add('is-loaded');
+    frame.style.setProperty('--tone', p.tone);
+    glow.style.background = p.tone;
+    $('[data-lb-n]').textContent = p.n;
+    $('[data-lb-cat]').textContent = p.cat;
+    $('[data-lb-cat]').style.color = p.tone;
+    $('[data-lb-title]').textContent = p.title;
+    $('[data-lb-tech]').textContent = p.technique;
+    $('[data-lb-wa]').setAttribute('href', p.wa);
+    // pré-carrega vizinhos
+    [current + 1, current - 1].forEach((i) => {
+      const n = data[(i + data.length) % data.length];
+      const pre = new Image();
+      pre.src = n.src;
+    });
+  };
+
+  const step = (dir: number) => {
+    const ids = visibleIds();
+    const pos = ids.indexOf(data[current].id);
+    const nextId = ids.length && pos !== -1 ? ids[(pos + dir + ids.length) % ids.length] : data[(current + dir + data.length) % data.length].id;
+    show(data.findIndex((d) => d.id === nextId));
+  };
+
+  document.querySelectorAll<HTMLElement>('[data-open-piece]').forEach((btn) =>
+    btn.addEventListener('click', () => {
+      opener = btn;
+      show(data.findIndex((d) => d.id === btn.dataset.openPiece));
+      dlg.showModal();
+      document.body.style.overflow = 'hidden';
+    })
+  );
+
+  const close = () => dlg.close();
+  dlg.addEventListener('close', () => {
+    document.body.style.overflow = '';
+    opener?.focus();
+  });
+  dlg.querySelectorAll('[data-lb-close]').forEach((b) => b.addEventListener('click', close));
+  dlg.querySelectorAll('[data-lb-prev]').forEach((b) => b.addEventListener('click', () => step(-1)));
+  dlg.querySelectorAll('[data-lb-next]').forEach((b) => b.addEventListener('click', () => step(1)));
+  dlg.addEventListener('click', (e) => {
+    if (e.target === dlg || e.target === $('[data-lb-stage]')) close();
+  });
+  dlg.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') step(1);
+    if (e.key === 'ArrowLeft') step(-1);
+  });
+
+  // Swipe no celular
+  let sx = 0;
+  let sy = 0;
+  frame.addEventListener('touchstart', (e) => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+  frame.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - sx;
+    const dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
+    else if (dy > 90) close();
+  });
+</script>

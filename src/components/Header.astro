@@ -1,0 +1,430 @@
+---
+import { STUDIO_INFO } from '../data/siteData';
+
+// Menu em tela cheia inspirado na mecânica da Superrb (onda que invade a tela,
+// links gigantes em cascata, hover em contorno e links secundários com cortina),
+// reinterpretado na estética Y2K: malha wireframe cromada, estrelas e violeta.
+
+const links = [
+  { href: '#topo', label: 'Início' },
+  { href: '#manifesto', label: 'Manifesto' },
+  { href: '#galeria', label: 'Galeria' },
+  { href: '#processo', label: 'Processo' },
+  { href: '#contato', label: 'Contato' },
+];
+
+const social = [
+  { label: 'Twitter / X', href: STUDIO_INFO.twitterUrl },
+  { label: 'Behance', href: STUDIO_INFO.behanceMainUrl },
+  { label: 'E-mail', href: `mailto:${STUDIO_INFO.email}` },
+];
+
+// Malha wireframe ondulada (gerada no build, zero JS no cliente)
+const W = 1000;
+const H = 760;
+const warp = (x: number, y: number) => y + Math.sin(x / 140 + y / 260) * 46 + Math.cos(y / 120) * 18;
+const rows: string[] = [];
+const cols: string[] = [];
+for (let y = 0; y <= H; y += 38) {
+  let d = '';
+  for (let x = 0; x <= W; x += 20) d += `${x === 0 ? 'M' : 'L'}${x} ${warp(x, y).toFixed(1)} `;
+  rows.push(d);
+}
+for (let x = 0; x <= W; x += 50) {
+  let d = '';
+  for (let y = 0; y <= H; y += 20) d += `${y === 0 ? 'M' : 'L'}${(x + Math.sin(y / 150) * 30).toFixed(1)} ${warp(x, y).toFixed(1)} `;
+  cols.push(d);
+}
+
+const wave = 'M 0 12.5 Q 4.7 5 9.4 12.5 T 18.75 12.5 T 28.1 12.5 T 37.5 12.5';
+---
+
+<header class="site-header fixed inset-x-0 top-0 z-[80] px-4 sm:px-8 pt-4 sm:pt-6" data-header>
+  <div class="mx-auto max-w-7xl flex items-center justify-between">
+    <a href="#topo" class="relative z-10 flex items-center min-h-[44px]" aria-label="Fleesh Studios — início" data-menu-close>
+      <img src="/y2k/logo-sm.webp" alt="" width="760" height="569" class="h-11 sm:h-14 w-auto drop-shadow-[0_0_14px_rgba(131,88,255,0.5)]" decoding="async" />
+    </a>
+
+    <button
+      type="button"
+      class="nav-toggle group relative z-10 inline-flex items-center gap-3 min-h-[48px] px-1 text-ink-50"
+      aria-expanded="false"
+      aria-controls="site-nav"
+      data-menu-toggle
+    >
+      <span class="nav-toggle__label font-mono text-xs uppercase tracking-[0.3em]">
+        <span class="sr-only" data-menu-sr>Abrir </span><span data-menu-word>Menu</span>
+      </span>
+      <svg width="30" height="20" viewBox="0 0 37.5 25" class="nav-toggle__icon overflow-visible" aria-hidden="true">
+        <g class="t-waves">
+          <path d={wave} transform="translate(0 -5)" />
+          <path d={wave} transform="translate(0 5)" />
+        </g>
+        <g class="t-close" transform="translate(6.25 0)">
+          <path d="M0 0 L25 25" />
+          <path d="M0 25 L25 0" />
+        </g>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<nav id="site-nav" class="site-nav fixed inset-0 z-[70] overflow-y-auto overflow-x-hidden" aria-label="Principal" data-menu inert>
+  <!-- Malha Y2K que invade a tela pelo canto inferior direito -->
+  <svg class="nav-mesh absolute pointer-events-none" viewBox={`0 -60 ${W} ${H + 120}`} preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="mesh-chrome" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#ffffff" stop-opacity=".9" />
+        <stop offset=".5" stop-color="#8358FF" stop-opacity=".9" />
+        <stop offset="1" stop-color="#B9F2FF" stop-opacity=".7" />
+      </linearGradient>
+    </defs>
+    <g fill="none" stroke="url(#mesh-chrome)" stroke-width="1.1">
+      {rows.map((d) => <path d={d} />)}
+      {cols.map((d) => <path d={d} opacity=".7" />)}
+    </g>
+  </svg>
+
+  <div class="nav-glow absolute pointer-events-none" aria-hidden="true"></div>
+
+  <div class="relative mx-auto max-w-7xl min-h-full px-6 sm:px-10 pt-32 sm:pt-40 pb-16 flex flex-col lg:flex-row lg:items-start justify-between gap-14">
+    <ul class="nav-main">
+      {links.map((l, i) => (
+        <li class="nav-item" style={`--i:${i}`}>
+          <a href={l.href} class="nav-link group" data-menu-close>
+            <img src="/y2k/star.webp" alt="" width="176" height="163" class="nav-star" aria-hidden="true" />
+            <span class="nav-num">0{i + 1}</span>
+            <span class="nav-text" data-text={l.label}>{l.label}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="nav-side grid grid-cols-2 lg:grid-cols-1 gap-10 lg:pt-6 lg:min-w-[220px]">
+      <div>
+        <h2 class="nav-sub-title" style="--i:1">Coleções</h2>
+        <ul class="mt-3 space-y-1.5">
+          {STUDIO_INFO.behanceCollections.map((c, i) => (
+            <li class="nav-sub-item" style={`--i:${i + 2}`}>
+              <a href={c.url} target="_blank" rel="noopener noreferrer" class="mask-link">
+                <span class="mask-link__text">{c.label}</span>
+                <span class="mask-link__mask" data-text={c.label}></span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h2 class="nav-sub-title" style="--i:2">Social</h2>
+        <ul class="mt-3 space-y-1.5">
+          {social.map((s, i) => (
+            <li class="nav-sub-item" style={`--i:${i + 3}`}>
+              <a href={s.href} target={s.href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer" class="mask-link">
+                <span class="mask-link__text">{s.label}</span>
+                <span class="mask-link__mask" data-text={s.label}></span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <p class="nav-sub-item col-span-2 lg:col-span-1 font-mono text-[11px] uppercase tracking-[0.25em] text-ink-400" style="--i:6">
+        Discord <span class="text-ink-50">{STUDIO_INFO.discordHandle}</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Logo flutuando no canto, como a animação da Superrb -->
+  <img src="/y2k/logo-sm.webp" alt="" width="760" height="569" loading="lazy" decoding="async" class="nav-logo absolute pointer-events-none" aria-hidden="true" />
+</nav>
+
+<style>
+  /* ---------- Botão: ondas ↔ X desenhados com stroke-dashoffset ---------- */
+  .nav-toggle__icon path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+  }
+  .t-waves path {
+    stroke-dasharray: 75 75;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 900ms cubic-bezier(0.65, 0, 0.35, 1) 250ms, opacity 200ms linear 250ms;
+  }
+  .t-close path {
+    stroke: #b9f2ff;
+    stroke-dasharray: 36 36;
+    stroke-dashoffset: 36;
+    transition: stroke-dashoffset 500ms cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  @media (hover: hover) {
+    .nav-toggle:hover .t-waves path { animation: waves 1s linear infinite; stroke: #b9a4ff; }
+  }
+  @keyframes waves { to { stroke-dashoffset: -150; } }
+
+  :global(.menu-open) .t-waves path {
+    animation: none;
+    stroke-dashoffset: -80;
+    opacity: 0;
+    transition: stroke-dashoffset 700ms cubic-bezier(0.65, 0, 0.35, 1), opacity 200ms linear 450ms;
+  }
+  :global(.menu-open) .t-close path {
+    stroke-dashoffset: 0;
+    transition-delay: 450ms;
+  }
+
+  .site-header { transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1); }
+  .site-header.is-hidden:not(:focus-within) { transform: translateY(-140%); }
+  :global(.menu-open) .site-header { transform: none; }
+
+  /* ---------- Overlay ---------- */
+  .site-nav {
+    background: rgba(5, 5, 6, 0.985);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 400ms ease, visibility 0s linear 900ms;
+    transition-delay: 450ms, 900ms;
+  }
+  :global(.menu-open) .site-nav {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 350ms ease, visibility 0s;
+  }
+
+  .nav-mesh {
+    width: 170vmax;
+    height: 130vmax;
+    right: -95vmax;
+    bottom: -110vmax;
+    transform: rotate(-14deg);
+    opacity: 0.55;
+    transition: right 1000ms cubic-bezier(0.82, -0.02, 0.45, 1.22), bottom 1000ms cubic-bezier(0.82, -0.02, 0.45, 1.22);
+  }
+  :global(.menu-open) .nav-mesh {
+    right: -55vmax;
+    bottom: -62vmax;
+    transition-delay: 250ms;
+    animation: mesh-breathe 9s ease-in-out 1.3s infinite;
+  }
+  @keyframes mesh-breathe { 50% { transform: rotate(-11deg) translateY(-2%); } }
+
+  .nav-glow {
+    right: -10vmax;
+    bottom: -10vmax;
+    width: 60vmax;
+    height: 60vmax;
+    border-radius: 9999px;
+    background: radial-gradient(circle, rgba(131, 88, 255, 0.45), transparent 65%);
+    opacity: 0;
+    transition: opacity 900ms ease 400ms;
+  }
+  :global(.menu-open) .nav-glow { opacity: 1; }
+
+  .nav-logo {
+    right: 4vw;
+    bottom: 3vh;
+    width: clamp(130px, 26vw, 380px);
+    opacity: 0;
+    transform: rotate(14deg) translateY(30px) scale(0.9);
+    filter: drop-shadow(0 0 30px rgba(131, 88, 255, 0.6));
+    transition: opacity 600ms ease, transform 1000ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  :global(.menu-open) .nav-logo {
+    opacity: 0.95;
+    transform: rotate(14deg);
+    transition-delay: 1000ms;
+    animation: float 7s ease-in-out 2s infinite;
+  }
+
+  /* ---------- Links principais: cascata vinda de cima ---------- */
+  .nav-item {
+    opacity: 0;
+    transform: translateY(-2em);
+    transition: opacity 250ms ease, transform 750ms ease-out;
+  }
+  :global(.menu-open) .nav-item {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 300ms ease calc(600ms + var(--i) * 90ms),
+      transform 800ms cubic-bezier(0.16, 1, 0.3, 1) calc(580ms + var(--i) * 80ms);
+  }
+
+  .nav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.9rem;
+    padding: 0.08em 0;
+    font-family: 'Unbounded', 'Syne', system-ui, sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.3rem, 8.5vw, 6rem);
+    line-height: 1.12;
+    letter-spacing: -0.035em;
+    color: #f5f4f0;
+    white-space: nowrap;
+  }
+  .nav-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: #8358ff;
+    transform: translateY(-1.6em);
+  }
+  .nav-text {
+    position: relative;
+    transition: color 400ms ease, -webkit-text-stroke-color 400ms ease, text-shadow 400ms ease;
+  }
+  .nav-star {
+    position: absolute;
+    left: -0.55em;
+    top: 50%;
+    width: 0.42em;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.2) rotate(-90deg);
+    transition: opacity 300ms ease, transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  /* Hover/ativo: texto vira contorno cromado com brilho violeta */
+  .nav-link:hover .nav-text,
+  .nav-link:focus-visible .nav-text,
+  .nav-link.is-active .nav-text {
+    color: transparent;
+    -webkit-text-stroke: 1.5px #f5f4f0;
+    text-shadow: 0 0 22px rgba(131, 88, 255, 0.55);
+  }
+  .nav-link:hover .nav-star,
+  .nav-link:focus-visible .nav-star,
+  .nav-link.is-active .nav-star {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  }
+  @media (max-width: 639px) {
+    .nav-star { display: none; }
+    .nav-logo { right: -6vw; bottom: -2vh; opacity: 0.5; }
+  }
+
+  /* ---------- Coluna secundária ---------- */
+  .nav-sub-title,
+  .nav-sub-item {
+    opacity: 0;
+    transform: translateY(-1.5em);
+    transition: opacity 250ms ease, transform 750ms ease-out;
+  }
+  :global(.menu-open) .nav-sub-title,
+  :global(.menu-open) .nav-sub-item {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 300ms ease calc(800ms + var(--i) * 90ms),
+      transform 800ms cubic-bezier(0.16, 1, 0.3, 1) calc(780ms + var(--i) * 80ms);
+  }
+  .nav-sub-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #858279;
+  }
+
+  /* Link com cortina: o texto apaga e uma cópia ciano varre da esquerda */
+  .mask-link {
+    position: relative;
+    display: inline-block;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: #f5f4f0;
+    padding: 0.15rem 0;
+  }
+  .mask-link__text { display: inline-block; transition: opacity 500ms ease; }
+  .mask-link__mask {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transform: translateX(-100%);
+    transition: transform 500ms ease-out 120ms;
+  }
+  .mask-link__mask::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    padding: 0.15rem 0;
+    white-space: nowrap;
+    color: #b9f2ff;
+    text-shadow: 0 0 12px rgba(185, 242, 255, 0.6);
+    transform: translateX(100%);
+    transition: inherit;
+  }
+  .mask-link:hover .mask-link__text,
+  .mask-link:focus-visible .mask-link__text { opacity: 0.3; }
+  .mask-link:hover .mask-link__mask,
+  .mask-link:hover .mask-link__mask::after,
+  .mask-link:focus-visible .mask-link__mask,
+  .mask-link:focus-visible .mask-link__mask::after { transform: translateX(0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav-mesh, .nav-logo { animation: none !important; }
+  }
+</style>
+
+<script>
+  const root = document.documentElement;
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const nav = document.querySelector<HTMLElement>('[data-menu]');
+  const word = document.querySelector<HTMLElement>('[data-menu-word]');
+  const sr = document.querySelector<HTMLElement>('[data-menu-sr]');
+
+  const setOpen = (open: boolean) => {
+    root.classList.toggle('menu-open', open);
+    toggle?.setAttribute('aria-expanded', String(open));
+    if (word) word.textContent = open ? 'Fechar' : 'Menu';
+    if (sr) sr.textContent = open ? '' : 'Abrir ';
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (nav) nav.inert = !open;
+    if (open) {
+      setTimeout(() => nav?.querySelector<HTMLElement>('.nav-link')?.focus({ preventScroll: true }), 650);
+    }
+  };
+
+  toggle?.addEventListener('click', () => setOpen(!root.classList.contains('menu-open')));
+  document.querySelectorAll('[data-menu-close]').forEach((a) =>
+    a.addEventListener('click', () => root.classList.contains('menu-open') && setOpen(false))
+  );
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && root.classList.contains('menu-open')) {
+      setOpen(false);
+      toggle?.focus();
+    }
+  });
+
+  // Seção ativa marcada no menu
+  const navLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('.nav-link'));
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          navLinks.forEach((l) => l.classList.toggle('is-active', l.getAttribute('href') === `#${e.target.id}`));
+        });
+      },
+      { rootMargin: '-45% 0px -50% 0px' }
+    );
+    navLinks.forEach((l) => {
+      const target = document.querySelector(l.getAttribute('href')!);
+      if (target) io.observe(target);
+    });
+  }
+
+  // Esconde o header ao descer, mostra ao subir
+  let last = 0;
+  window.addEventListener(
+    'scroll',
+    () => {
+      const y = window.scrollY;
+      header?.classList.toggle('is-hidden', y > last && y > 240);
+      last = y;
+    },
+    { passive: true }
+  );
+</script>
