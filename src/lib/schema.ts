@@ -7,7 +7,6 @@ export function generateSchemaLD(): string {
     name: STUDIO_INFO.name,
     description: STUDIO_INFO.description,
     email: STUDIO_INFO.email,
-    telephone: `+${STUDIO_INFO.whatsappNumber}`,
     sameAs: [
       STUDIO_INFO.twitterUrl,
       ...STUDIO_INFO.behanceCollections.map((item) => item.url),

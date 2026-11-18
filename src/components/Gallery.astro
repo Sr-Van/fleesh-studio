@@ -1,6 +1,6 @@
 ---
 import Icon from './Icon.astro';
-import { PORTFOLIO_ITEMS, STUDIO_INFO, buildWhatsAppUrl } from '../data/siteData';
+import { PORTFOLIO_ITEMS, STUDIO_INFO } from '../data/siteData';
 
 const filters = [
   { id: 'all', label: 'Todas', count: PORTFOLIO_ITEMS.length },
@@ -21,7 +21,6 @@ const lightboxData = PORTFOLIO_ITEMS.map((i, idx) => ({
   alt: i.alt,
   tone: i.dominantPalette,
   technique: i.contrastFocus,
-  wa: buildWhatsAppUrl(i.whatsappPrompt),
 }));
 ---
 
@@ -57,7 +56,7 @@ const lightboxData = PORTFOLIO_ITEMS.map((i, idx) => ({
     </div>
 
     <!-- Parede de obras -->
-    <ul class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8 sm:gap-y-10 [grid-auto-flow:dense]" data-wall>
+    <ul class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 [grid-auto-flow:dense]" data-wall>
       {PORTFOLIO_ITEMS.map((item, idx) => (
         <li
           class={`piece-li ${isHero(idx) ? 'sm:col-span-2 lg:row-span-2' : ''}`}
@@ -69,11 +68,11 @@ const lightboxData = PORTFOLIO_ITEMS.map((i, idx) => ({
             type="button"
             data-open-piece={item.id}
             data-cursor="Ver"
-            class="piece group relative isolate block w-full text-left"
+            class="piece group relative isolate block w-full h-full text-left overflow-hidden rounded-2xl"
             style={`--tone:${item.dominantPalette}`}
             aria-label={`Abrir obra ${idx + 1}: ${item.title}`}
           >
-            <div class="art-frame aspect-video rounded-2xl ring-1 ring-white/10 group-hover:ring-white/25 transition-shadow" style={`--tone:${item.dominantPalette}`}>
+            <div class={`art-frame aspect-video rounded-2xl ring-1 ring-white/10 group-hover:ring-white/25 transition-shadow ${isHero(idx) ? 'lg:aspect-auto lg:h-full' : ''}`} style={`--tone:${item.dominantPalette}`}>
               <img
                 src={item.thumbSrc}
                 srcset={`${item.thumbSrc} 640w, ${item.src} 1280w`}
@@ -86,17 +85,17 @@ const lightboxData = PORTFOLIO_ITEMS.map((i, idx) => ({
                 class="w-full h-full object-cover"
               />
             </div>
-            <div class="mt-3 flex items-start justify-between gap-4">
-              <div class="min-w-0">
-                <p class="font-mono text-[11px] uppercase tracking-widest text-ink-400">
+            <div class="piece-info pointer-events-none absolute inset-0 flex items-end justify-between gap-4 rounded-2xl p-4 sm:p-5 bg-gradient-to-t from-black/85 via-black/30 to-transparent opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-500">
+              <div class="min-w-0 translate-y-2 group-hover:translate-y-0 group-focus-visible:translate-y-0 transition-transform duration-500">
+                <p class="font-mono text-[11px] uppercase tracking-widest text-ink-200">
                   Nº {String(idx + 1).padStart(2, '0')} · <span style={`color:${item.dominantPalette}`}>{item.categoryLabel}</span>
                 </p>
-                <h3 class={`mt-1 font-display font-bold tracking-tight text-ink-50 ${isHero(idx) ? 'text-xl sm:text-2xl' : 'text-lg'}`}>
+                <h3 class={`mt-1 font-display font-bold tracking-tight text-ink-50 ${isHero(idx) ? 'text-xl sm:text-2xl' : 'text-base sm:text-lg'}`}>
                   {item.title}
                 </h3>
-                {isHero(idx) && <p class="mt-1 text-sm text-ink-400">{item.contrastFocus}</p>}
+                {isHero(idx) && <p class="mt-1 text-sm text-ink-200">{item.contrastFocus}</p>}
               </div>
-              <span class="mt-1 grid place-items-center shrink-0 w-9 h-9 rounded-full border border-white/10 text-ink-200 group-hover:bg-flame-500 group-hover:border-flame-500 group-hover:text-white transition-colors duration-300">
+              <span class="grid place-items-center shrink-0 w-9 h-9 rounded-full border border-white/20 bg-black/40 text-ink-50">
                 <Icon name="arrow-up-right" class="w-4 h-4" />
               </span>
             </div>
@@ -149,7 +148,7 @@ const lightboxData = PORTFOLIO_ITEMS.map((i, idx) => ({
         <button type="button" class="sm:hidden grid place-items-center w-14 h-14 shrink-0 rounded-full bg-white/10 text-ink-50" aria-label="Obra anterior" data-lb-prev>
           <Icon name="chevron-left" class="w-5 h-5" />
         </button>
-        <a data-lb-wa href="#" target="_blank" rel="noopener noreferrer" class="flex-1 inline-flex items-center justify-center gap-2 min-h-[56px] px-6 rounded-full y2k-border text-ink-200 hover:text-ink-50 text-sm whitespace-nowrap">
+        <a data-lb-cta href="#contato" class="flex-1 inline-flex items-center justify-center gap-2 min-h-[56px] px-6 rounded-full y2k-border text-ink-200 hover:text-ink-50 text-sm whitespace-nowrap">
           Quero algo assim <Icon name="arrow-up-right" class="w-4 h-4" />
         </a>
         <button type="button" class="sm:hidden grid place-items-center w-14 h-14 shrink-0 rounded-full bg-white/10 text-ink-50" aria-label="Próxima obra" data-lb-next>
@@ -178,7 +177,7 @@ const lightboxData = PORTFOLIO_ITEMS.map((i, idx) => ({
 </style>
 
 <script>
-  type Piece = { id: string; n: string; title: string; cat: string; src: string; alt: string; tone: string; technique: string; wa: string };
+  type Piece = { id: string; n: string; title: string; cat: string; src: string; alt: string; tone: string; technique: string };
   const data: Piece[] = JSON.parse(document.getElementById('lb-data')!.textContent || '[]');
 
   // ---------- Filtros ----------
@@ -230,7 +229,6 @@ const lightboxData = PORTFOLIO_ITEMS.map((i, idx) => ({
     $('[data-lb-cat]').style.color = p.tone;
     $('[data-lb-title]').textContent = p.title;
     $('[data-lb-tech]').textContent = p.technique;
-    $('[data-lb-wa]').setAttribute('href', p.wa);
     // pré-carrega vizinhos
     [current + 1, current - 1].forEach((i) => {
       const n = data[(i + data.length) % data.length];
@@ -261,6 +259,10 @@ const lightboxData = PORTFOLIO_ITEMS.map((i, idx) => ({
     opener?.focus();
   });
   dlg.querySelectorAll('[data-lb-close]').forEach((b) => b.addEventListener('click', close));
+  dlg.querySelector('[data-lb-cta]')?.addEventListener('click', () => {
+    opener = null;
+    close();
+  });
   dlg.querySelectorAll('[data-lb-prev]').forEach((b) => b.addEventListener('click', () => step(-1)));
   dlg.querySelectorAll('[data-lb-next]').forEach((b) => b.addEventListener('click', () => step(1)));
   dlg.addEventListener('click', (e) => {

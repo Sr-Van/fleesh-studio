@@ -58,8 +58,6 @@ export const STUDIO_INFO = {
   tagline: 'Direção de Arte & Thumbnails de Alto CTR para YouTube',
   description:
     'Portfólio e estúdio especializado em thumbnails para YouTube (Roblox, Minecraft e Variety Games) com foco em leitura imediata no celular, expressão 3D e alto contraste.',
-  whatsappNumber: '558893067814',
-  whatsappFormatted: '(88) 9306-7814',
   email: 'fleeshworks@gmail.com',
   discordHandle: '/Fleesh',
   twitterUrl: 'https://twitter.com/FleeshStudios',
@@ -87,13 +85,6 @@ export const STUDIO_INFO = {
   ],
   copyrightYear: 2026,
 } as const;
-
-export function buildWhatsAppUrl(customMessage?: string): string {
-  const defaultMsg =
-    'Olá! Vi o portfólio da Fleesh Studios e gostaria de conversar sobre a criação de thumbnails para o meu canal.';
-  const text = encodeURIComponent(customMessage || defaultMsg);
-  return `https://wa.me/${STUDIO_INFO.whatsappNumber}?text=${text}`;
-}
 
 export const PORTFOLIO_ITEMS: PortfolioItem[] = [
   {
@@ -548,6 +539,6 @@ export const FAQ_ITEMS: FAQItem[] = [
   {
     question: 'Por onde é mais rápido fechar pedido ou pacote?',
     answer:
-      'Pelo WhatsApp ((88) 9306-7814) você já abre a conversa com o briefing preenchido e recebe resposta direta. Também atendemos pelo Discord (/Fleesh) e e-mail (fleeshworks@gmail.com).',
+      'Atendemos diretamente pelo Discord (/Fleesh) e por e-mail (fleeshworks@gmail.com).',
   },
 ];

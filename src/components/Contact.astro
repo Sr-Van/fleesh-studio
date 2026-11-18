@@ -1,12 +1,11 @@
 ---
 import Icon from './Icon.astro';
-import { STUDIO_INFO, buildWhatsAppUrl } from '../data/siteData';
+import { STUDIO_INFO } from '../data/siteData';
 
 const links = [
   { label: 'Discord', value: STUDIO_INFO.discordHandle, icon: 'discord' as const, href: null },
   { label: 'Twitter / X', value: STUDIO_INFO.twitterHandle, icon: 'twitter' as const, href: STUDIO_INFO.twitterUrl },
   { label: 'Behance', value: 'Portfólio completo', icon: 'behance' as const, href: STUDIO_INFO.behanceMainUrl },
-  { label: 'WhatsApp', value: STUDIO_INFO.whatsappFormatted, icon: 'whatsapp' as const, href: buildWhatsAppUrl() },
 ];
 ---
 
@@ -31,7 +30,7 @@ const links = [
       <Icon name="copy" class="w-4 h-4 text-ink-400" />
     </button>
 
-    <ul class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-3 text-left">
+    <ul class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-3 text-left">
       {links.map((l, i) => {
         const Tag = l.href ? 'a' : 'div';
         return (
