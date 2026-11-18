@@ -1,12 +1,21 @@
 ---
-import { PORTFOLIO_ITEMS } from '../data/siteData';
+import { getPortfolioItems } from '../data/siteData';
+import { getTranslations, type Locale } from '../i18n';
 
-const words = ['Cor', 'Expressão', 'Luz de recorte', 'Drama', 'Contraste', 'Narrativa', 'Escala', 'Caos controlado'];
-const rowA = PORTFOLIO_ITEMS.slice(4, 13);
-const rowB = PORTFOLIO_ITEMS.slice(13);
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+const portfolioItems = getPortfolioItems(locale);
+
+const words = t.marquee.words;
+const rowA = portfolioItems.slice(4, 13);
+const rowB = portfolioItems.slice(13);
 ---
 
-<section aria-label="Manifesto em movimento" class="relative py-10 sm:py-14 border-y border-white/5 overflow-hidden">
+<section aria-label={t.marquee.ariaLabel} class="relative py-10 sm:py-14 border-y border-white/5 overflow-hidden">
   <!-- Palavras -->
   <div class="marquee-wrap" aria-hidden="true">
     <div class="marquee" style="--speed:40s">

@@ -1,11 +1,19 @@
 ---
 import Icon from './Icon.astro';
 import { STUDIO_INFO } from '../data/siteData';
+import { getTranslations, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getTranslations(locale);
 
 const links = [
   { label: 'Discord', value: STUDIO_INFO.discordHandle, icon: 'discord' as const, href: null },
   { label: 'Twitter / X', value: STUDIO_INFO.twitterHandle, icon: 'twitter' as const, href: STUDIO_INFO.twitterUrl },
-  { label: 'Behance', value: 'Portfólio completo', icon: 'behance' as const, href: STUDIO_INFO.behanceMainUrl },
+  { label: 'Behance', value: t.contact.behanceValue, icon: 'behance' as const, href: STUDIO_INFO.behanceMainUrl },
 ];
 ---
 
@@ -15,12 +23,13 @@ const links = [
   <div class="mx-auto max-w-5xl px-4 sm:px-6">
     <img data-reveal src="/y2k/star.webp" alt="" aria-hidden="true" width="176" height="163" loading="lazy" class="mx-auto w-14 sparkle" style="--t:3s" />
     <h2 data-reveal="mask" class="mt-6 font-display font-extrabold tracking-[-0.04em] leading-[0.95] text-[clamp(2.2rem,9vw,6rem)]">
-      <span class="chrome-text">Vamos criar</span><br />algo <span class="font-serif italic font-normal text-flame-500 glow">absurdo.</span>
+      <span class="chrome-text">{t.contact.headingLine1}</span><br />{t.contact.headingLine2Prefix}<span class="font-serif italic font-normal text-flame-500 glow">{t.contact.headingLine2Accent}</span>
     </h2>
 
     <button
       type="button"
       data-copy-email
+      data-copied-label={t.contact.copiedLabel}
       data-reveal
       class="mt-10 inline-flex items-center gap-3 min-h-[52px] px-6 rounded-full y2k-border bg-white/[0.03] backdrop-blur text-ink-50 font-mono text-sm sm:text-base hover:bg-white/[0.07] transition-colors"
       style="--d:150ms"
@@ -52,7 +61,7 @@ const links = [
 
     <p class="mt-20 flex flex-wrap justify-between gap-2 font-mono text-[11px] uppercase tracking-widest text-ink-400">
       <span>© {STUDIO_INFO.copyrightYear} Fleesh Studios</span>
-      <span>✦ made in 16:9 ✦</span>
+      <span>{t.contact.footerTag}</span>
     </p>
   </div>
 </section>
@@ -61,10 +70,11 @@ const links = [
   const btn = document.querySelector<HTMLButtonElement>('[data-copy-email]');
   const label = btn?.querySelector('[data-copy-label]');
   const email = label?.textContent || '';
+  const copiedText = btn?.dataset.copiedLabel || 'copied ✦';
   btn?.addEventListener('click', async () => {
     try {
       await navigator.clipboard.writeText(email);
-      label!.textContent = 'copiado ✦';
+      label!.textContent = copiedText;
       setTimeout(() => (label!.textContent = email), 1600);
     } catch {
       window.location.href = `mailto:${email}`;

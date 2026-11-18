@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from './Header.astro';
+import Hero from './Hero.astro';
+import Manifesto from './Manifesto.astro';
+import Marquee from './Marquee.astro';
+import Gallery from './Gallery.astro';
+import Contact from './Contact.astro';
+import type { Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+
+<BaseLayout locale={locale}>
+  <Header locale={locale} />
+  <main id="conteudo">
+    <Hero locale={locale} />
+    <Manifesto locale={locale} />
+    <Marquee locale={locale} />
+    <Gallery locale={locale} />
+    <Contact locale={locale} />
+  </main>
+</BaseLayout>

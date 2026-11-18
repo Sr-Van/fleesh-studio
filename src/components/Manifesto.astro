@@ -1,16 +1,26 @@
 ---
-import { PORTFOLIO_ITEMS } from '../data/siteData';
+import { getPortfolioItems } from '../data/siteData';
+import { getTranslations, type Locale } from '../i18n';
 
-const fan = PORTFOLIO_ITEMS.filter((i) => i.featured).slice(0, 3);
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+
+const fan = getPortfolioItems(locale)
+  .filter((i) => i.featured)
+  .slice(0, 3);
 const pose = ['-rotate-[8deg] -translate-x-[18%] translate-y-[6%]', 'rotate-[2deg] z-10', 'rotate-[10deg] translate-x-[18%] translate-y-[8%]'];
 ---
 
 <section id="manifesto" class="relative min-h-[90svh] flex items-center py-28 sm:py-40">
   <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
     <div>
-      <p data-reveal class="font-mono text-sm sm:text-base uppercase tracking-[0.3em] text-flame-500 glow">✦ Por que thumbnails?</p>
+      <p data-reveal class="font-mono text-sm sm:text-base uppercase tracking-[0.3em] text-flame-500 glow">{t.manifesto.eyebrow}</p>
       <p data-reveal class="mt-6 max-w-[52ch] text-xl sm:text-2xl lg:text-[1.7rem] text-ink-50 leading-relaxed" style="--d:150ms">
-        As Miniaturas ou Thumbnails, como chamamos as capas de vídeo, são o principal impulsionador do seus vídeos no Youtube, ter uma thumbnail criativa e chamativa vai fazer com que cada vez mais, novos espectadores cliquem no seu vídeo, além de deixar seu canal com uma aparência única e estilosa.
+        {t.manifesto.body}
       </p>
     </div>
 
@@ -19,9 +29,9 @@ const pose = ['-rotate-[8deg] -translate-x-[18%] translate-y-[6%]', 'rotate-[2de
         <button
           type="button"
           data-open-piece={item.id}
-          data-cursor="Ver"
+          data-cursor={t.manifesto.cursorLabel}
           class={`absolute inset-x-[7%] top-[16%] rounded-2xl overflow-hidden y2k-border shadow-[0_30px_60px_-15px_rgba(0,0,0,0.9)] transition-transform duration-700 ease-art hover:-translate-y-3 hover:rotate-0 hover:z-20 ${pose[i]}`}
-          aria-label={`Abrir obra: ${item.title}`}
+          aria-label={t.manifesto.openPieceLabel(item.title)}
         >
           <div class="art-frame aspect-video" style={`--tone:${item.dominantPalette}`}>
             <img

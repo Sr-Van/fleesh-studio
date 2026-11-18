@@ -1,4 +1,13 @@
 ---
+import { getTranslations, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+
 // Abertura: o logotipo cromado é o protagonista.
 const sparkles = [
   { top: '14%', left: '8%', size: 34, t: '3.2s', d: '0s' },
@@ -27,7 +36,7 @@ const sparkles = [
   ))}
 
   <p class="fade-up font-mono text-[11px] sm:text-xs uppercase tracking-[0.35em] text-ink-200" style="--d:900ms">
-    ✦ Thumbnail art · Roblox · Minecraft · Variety ✦
+    {t.hero.eyebrow}
   </p>
 
   <h1 class="relative mt-4 w-full mx-auto max-w-[min(820px,100%,calc((100svh-260px)*1.336))]" data-logo-tilt>
@@ -50,11 +59,11 @@ const sparkles = [
   </h1>
 
   <p class="fade-up mt-2 sm:-mt-4 font-display font-semibold text-lg sm:text-2xl tracking-tight chrome-text" style="--d:1200ms">
-    O melhor jeito de dar hype nos seus vídeos.
+    {t.hero.subtitle}
   </p>
 
   <a href="#manifesto" class="fade-up group mt-14 inline-flex flex-col items-center gap-3 text-ink-400 hover:text-ink-50 transition-colors" style="--d:1500ms">
-    <span class="font-mono text-[10px] uppercase tracking-[0.4em]">Entrar</span>
+    <span class="font-mono text-[10px] uppercase tracking-[0.4em]">{t.hero.cta}</span>
     <span class="relative h-12 w-[1px] overflow-hidden bg-white/15" aria-hidden="true">
       <span class="drop absolute inset-x-0 top-0 h-1/2 bg-ink-50"></span>
     </span>
