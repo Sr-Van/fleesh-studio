@@ -83,45 +83,69 @@ export const en: TranslationDictionary = {
     footerTag: '✦ made in 16:9 ✦',
   },
   portfolio: {
-    'roblox-rainbow-friends': {
-      title: 'Escape the Rainbow Friends',
-      categoryLabel: 'Roblox',
-      alt: 'Roblox thumbnail with character running away holding an item in front of the Blue, Green, Orange, and Red monsters',
-      contrastFocus: '3D silhouette + Warm/cool rim light',
-      whatsappPrompt:
-        'Hi! I liked the "Escape the Rainbow Friends" (Roblox) thumbnail in the Fleesh Studios portfolio. I want to order a cover in this style.',
-    },
-    'minecraft-love-tester': {
-      title: '100% Love Tester in Minecraft',
+    'minecraft-shenron-dragon': {
+      title: 'Summoning the Dragon',
       categoryLabel: 'Minecraft',
-      alt: 'Minecraft thumbnail with two expressive characters side by side and a central heart meter at 100%',
-      contrastFocus: 'Reaction symmetry + High-contrast white outline',
+      alt: 'Minecraft thumbnail with a giant green dragon coiled in a stormy sky above a small character glowing with energy',
+      contrastFocus: 'Epic scale + Lightning glow',
       whatsappPrompt:
-        'Hi! I liked the "100% Love Tester in Minecraft" thumbnail in the Fleesh Studios portfolio. I want a cover along these lines.',
+        'Hi! I liked the "Summoning the Dragon" (Minecraft) thumbnail. I want an epic cover in this style.',
     },
-    'roblox-doors-crucifix': {
-      title: 'DOORS: The Blue Crucifix',
+    'roblox-legendary-scythe': {
+      title: 'The 0.01% Scythe',
       categoryLabel: 'Roblox',
-      alt: 'Roblox DOORS thumbnail with character holding a glowing crucifix sealing a dark entity with blue chains',
-      contrastFocus: 'Emissive cyan lighting + Confident expression',
+      alt: 'Roblox thumbnail with a festive character next to a glowing red legendary scythe and a "0.01%" label',
+      contrastFocus: 'Red neon aura + Rarity callout',
       whatsappPrompt:
-        'Hi! I liked the "DOORS: The Blue Crucifix" (Roblox) thumbnail in the portfolio. I want to order one in this style.',
+        'Hi! I liked the "The 0.01% Scythe" (Roblox) thumbnail. I want a rare-item cover in this style.',
     },
-    'variety-welcome-to-ohio': {
-      title: 'Chaos in Ohio (SML Style)',
-      categoryLabel: 'Variety & SML',
-      alt: 'Variety thumbnail with two panicked characters fleeing explosions and a meteor in front of a Welcome to Ohio sign',
-      contrastFocus: 'Cinematic tension + Foreground signpost',
+    'gaming-pink-kaiju': {
+      title: 'Pink Kaiju in the City',
+      categoryLabel: 'Gaming',
+      alt: 'Gaming thumbnail with a shocked creator in front of a giant pink-spiked kaiju destroying a blocky city',
+      contrastFocus: 'Face reaction + Giant-scale threat',
       whatsappPrompt:
-        'Hi! I saw the "Chaos in Ohio" (Variety/SML) thumbnail in the Fleesh Studios portfolio and want a cover with that energy.',
+        'Hi! I liked the "Pink Kaiju in the City" (Gaming) thumbnail. I want a reaction cover in this style.',
     },
-    'roblox-icy-road-supercars': {
-      title: 'Icy Road: Supercars on Ice',
+    'minecraft-cobblemon-400-days': {
+      title: '400 Days of Cobblemon',
+      categoryLabel: 'Minecraft',
+      alt: 'Minecraft thumbnail with legendary creatures surrounding a golden titan and the "400 Days Cobblemon" title',
+      contrastFocus: 'Radial composition + Divine backlight',
+      whatsappPrompt:
+        'Hi! I liked the "400 Days of Cobblemon" (Minecraft) thumbnail. I want a 100-days cover in this style.',
+    },
+    'roblox-the-throne': {
+      title: 'Bayoshin\'s Throne',
       categoryLabel: 'Roblox',
-      alt: 'Roblox thumbnail with sports cars drifting across cracked ice and a character running in the foreground',
-      contrastFocus: 'Dynamic diagonal composition + Motion blur',
+      alt: 'Roblox thumbnail with a character sitting on a dark throne in a red hellish hall under skull icons',
+      contrastFocus: 'Symmetry + Red fog',
       whatsappPrompt:
-        'Hi! I liked the "Icy Road: Supercars on Ice" (Roblox) thumbnail. I want to make a cover with cars and action.',
+        'Hi! I liked the "Bayoshin\'s Throne" (Roblox) thumbnail. I want a dark cover in this style.',
+    },
+    'minecraft-knight-hardcore': {
+      title: 'The Knight\'s Hardcore',
+      categoryLabel: 'Minecraft',
+      alt: 'Minecraft Hardcore thumbnail with an armored knight on horseback leading allies in front of a burning castle',
+      contrastFocus: 'Heroic pose + Fire backlight',
+      whatsappPrompt:
+        'Hi! I liked the "The Knight\'s Hardcore" (Minecraft) thumbnail. I want a hardcore cover in this style.',
+    },
+    'gaming-secret-turtle-base': {
+      title: 'The Secret Turtle Base',
+      categoryLabel: 'Gaming',
+      alt: 'Gaming thumbnail with a smiling creator making a shush gesture beside a turtle hiding a secret ladder',
+      contrastFocus: 'Secret hook + Clean colour blocking',
+      whatsappPrompt:
+        'Hi! I liked the "The Secret Turtle Base" (Gaming) thumbnail. I want a secret-build cover in this style.',
+    },
+    'roblox-forge-blade': {
+      title: 'Forging the Blade',
+      categoryLabel: 'Roblox',
+      alt: 'Roblox thumbnail with a character hammering a glowing sword on an anvil amid sparks in a forge',
+      contrastFocus: 'Spark particles + Warm forge light',
+      whatsappPrompt:
+        'Hi! I liked the "Forging the Blade" (Roblox) thumbnail. I want a crafting cover in this style.',
     },
     'roblox-butcher-chef': {
       title: 'The Giant Butcher Chef',
@@ -131,53 +155,69 @@ export const en: TranslationDictionary = {
       whatsappPrompt:
         'Hi! I liked "The Giant Butcher Chef" (Roblox) thumbnail. I want a horror/suspense cover with this vibe.',
     },
-    'minecraft-sleepover': {
-      title: 'Minecraft Sleepover Party',
+    'minecraft-hardcore-inferno': {
+      title: 'Hardcore Inferno',
       categoryLabel: 'Minecraft',
-      alt: 'Minecraft thumbnail showing three characters lying side by side with a startled expression in the center',
-      contrastFocus: 'Three-block readability + Central comedic expression',
+      alt: 'Minecraft Hardcore thumbnail with a towering molten mob rising from a blood-red landscape',
+      contrastFocus: 'Monochrome red + Looming scale',
       whatsappPrompt:
-        'Hi! I liked the "Minecraft Sleepover Party" thumbnail. I would like to order a roleplay cover.',
+        'Hi! I liked the "Hardcore Inferno" (Minecraft) thumbnail. I want a horror cover in this style.',
     },
-    'roblox-doors-seek-fire': {
-      title: 'Escaping Seek in Flames',
+    'gaming-tnt-ufo': {
+      title: 'The TNT UFO',
+      categoryLabel: 'Gaming',
+      alt: 'Gaming thumbnail with a screaming creator as a UFO beam drops TNT blocks onto a red grid',
+      contrastFocus: 'Face reaction + Light beam focus',
+      whatsappPrompt:
+        'Hi! I liked the "The TNT UFO" (Gaming) thumbnail. I want a reaction cover in this style.',
+    },
+    'roblox-hidden-eye': {
+      title: 'The Eye in the Leaves',
       categoryLabel: 'Roblox',
-      alt: 'Roblox thumbnail featuring a burning hallway and two creators running from Seek silhouette',
-      contrastFocus: 'Black silhouette against orange fire + Depth',
+      alt: 'Roblox thumbnail with a character facing a giant glowing blue eye hidden in a pile of autumn leaves',
+      contrastFocus: 'Complementary colours + Mystery hook',
       whatsappPrompt:
-        'Hi! I liked the "Escaping Seek in Flames" (Roblox) thumbnail. I want a chase/action cover.',
+        'Hi! I liked the "The Eye in the Leaves" (Roblox) thumbnail. I want a mystery cover in this style.',
     },
-    'roblox-dunk-simulator': {
-      title: 'Dunk Beyond 999M',
-      categoryLabel: 'Roblox',
-      alt: 'Space basketball Roblox thumbnail showing a player dunking a flaming ball into a giant hoop with multiplier numbers',
-      contrastFocus: 'Extreme wide-angle + Electric energy',
-      whatsappPrompt:
-        'Hi! I liked the "Dunk Beyond 999M" (Roblox Simulator) thumbnail. I want to order a cover like this.',
-    },
-    'minecraft-premier-rendez-vous': {
-      title: 'First Date on the Boat',
+    'minecraft-soulrend': {
+      title: '100 Days in Soulrend',
       categoryLabel: 'Minecraft',
-      alt: 'Minecraft thumbnail with a couple in a boat at a vibrant sunset and a pixelated heart bubble',
-      contrastFocus: 'Warm sunset palette + Clean center framing',
+      alt: 'Minecraft thumbnail with dark armored warriors raising glowing blue weapons under the "100 Days Soulrend" title',
+      contrastFocus: 'Cold glow + Dark armour detail',
       whatsappPrompt:
-        'Hi! I liked the "First Date on the Boat" (Minecraft) thumbnail. I want a story/roleplay cover.',
+        'Hi! I liked the "100 Days in Soulrend" (Minecraft) thumbnail. I want a 100-days cover in this style.',
     },
-    'roblox-arm-wrestle-crack': {
-      title: 'Extreme Arm Wrestle',
+    'gaming-me-in-roblox': {
+      title: 'That\'s Me in Roblox',
+      categoryLabel: 'Gaming',
+      alt: 'Gaming thumbnail with a creator\'s face on a blocky avatar pointed out by a red "ME" arrow',
+      contrastFocus: 'Arrow callout + Saturated palette',
+      whatsappPrompt:
+        'Hi! I liked the "That\'s Me in Roblox" (Gaming) thumbnail. I want a reaction cover in this style.',
+    },
+    'roblox-no-digging': {
+      title: 'No Digging Allowed',
       categoryLabel: 'Roblox',
-      alt: 'Roblox thumbnail of an exaggerated arm-wrestling match contrasting a victorious grin and pure shock',
-      contrastFocus: 'Cartoonish exaggeration + Clear force contrast',
+      alt: 'Roblox thumbnail with a character holding a shovel in front of a giant toothed hole and a "No Digging" sign',
+      contrastFocus: 'Radial teeth + Warning sign',
       whatsappPrompt:
-        'Hi! I liked the "Extreme Arm Wrestle" (Roblox) thumbnail. I want to order a challenge cover.',
+        'Hi! I liked the "No Digging Allowed" (Roblox) thumbnail. I want a challenge cover in this style.',
     },
-    'variety-jeffy-megaphone': {
-      title: 'Megaphone at Max Volume',
-      categoryLabel: 'Variety & SML',
-      alt: 'Variety thumbnail with a character shouting into a megaphone next to another character chilling with headphones',
-      contrastFocus: 'Comedy contrast + Directional sound waves',
+    'minecraft-oceanblock': {
+      title: '100 Days in OceanBlock 2',
+      categoryLabel: 'Minecraft',
+      alt: 'Minecraft thumbnail with a character on a raft surrounded by giant purple tentacles rising from the sea',
+      contrastFocus: 'Split water line + Purple threat',
       whatsappPrompt:
-        'Hi! I liked the "Megaphone at Max Volume" (Variety/SML) thumbnail. I want to order a comedy cover.',
+        'Hi! I liked the "100 Days in OceanBlock 2" (Minecraft) thumbnail. I want a 100-days cover in this style.',
+    },
+    'gaming-run': {
+      title: 'RUN',
+      categoryLabel: 'Gaming',
+      alt: 'Gaming thumbnail with a shocked creator covering their mouth next to a giant "RUN" carved into a blocky map',
+      contrastFocus: 'Face reaction + Circled detail',
+      whatsappPrompt:
+        'Hi! I liked the "RUN" (Gaming) thumbnail. I want a reaction cover in this style.',
     },
     'roblox-spider-mutation': {
       title: '50/50 Spider Mutation',
@@ -187,29 +227,69 @@ export const en: TranslationDictionary = {
       whatsappPrompt:
         'Hi! I liked the "50/50 Spider Mutation" (Roblox) thumbnail. I want a cover with a transformation effect.',
     },
-    'minecraft-grimace-shake': {
-      title: 'The Grimace Shake Mystery',
-      categoryLabel: 'Minecraft',
-      alt: 'Minecraft thumbnail with a purple character holding a cup and a suited duck lying on the ground with purple liquid',
-      contrastFocus: 'Saturated purple silhouette against blue sky and green grass',
-      whatsappPrompt:
-        'Hi! I liked "The Grimace Shake Mystery" (Minecraft) thumbnail. I want to make a cover in this format.',
-    },
-    'roblox-skibidi-choice': {
-      title: 'Right or Wrong Choice',
+    'roblox-hour-23': {
+      title: 'Hour 23',
       categoryLabel: 'Roblox',
-      alt: 'Roblox thumbnail with two scared characters on the left and three choices on the right marked with red X and green checkmarks',
-      contrastFocus: 'Visual choice trigger (Red X vs Green check)',
+      alt: 'Roblox thumbnail with a character in a golden suit lying in the snow beside ice weapons and a handwritten "Hour 23"',
+      contrastFocus: 'Top-down view + Handwritten text',
       whatsappPrompt:
-        'Hi! I liked the "Right or Wrong Choice" (Roblox) thumbnail. I want to order an interactive-style cover like this.',
+        'Hi! I liked the "Hour 23" (Roblox) thumbnail. I want a survival cover in this style.',
     },
-    'minecraft-caught-stealing': {
-      title: 'Caught on Security Camera',
+    'minecraft-better-minecraft': {
+      title: 'Better Minecraft',
       categoryLabel: 'Minecraft',
-      alt: 'Minecraft thumbnail split between a REC monitor showing chest theft and a character crying in shock on the right',
-      contrastFocus: 'Narrative split-screen (Cause and Reaction)',
+      alt: 'Minecraft thumbnail with a diamond-armored hero flanked by enchanted warriors and lightning',
+      contrastFocus: 'Teal glow + Triangle composition',
       whatsappPrompt:
-        'Hi! I liked the "Caught on Security Camera" (Minecraft) thumbnail. I want a split-screen cover like this.',
+        'Hi! I liked the "Better Minecraft" (Minecraft) thumbnail. I want a modded cover in this style.',
+    },
+    'gaming-tornado': {
+      title: 'Hiding from the Tornado',
+      categoryLabel: 'Gaming',
+      alt: 'Gaming thumbnail with three terrified creators huddled by a wall as a tornado tears through a blocky field',
+      contrastFocus: 'Group reaction + Motion debris',
+      whatsappPrompt:
+        'Hi! I liked the "Hiding from the Tornado" (Gaming) thumbnail. I want a reaction cover in this style.',
+    },
+    'roblox-day-99': {
+      title: 'Day 99',
+      categoryLabel: 'Roblox',
+      alt: 'Roblox thumbnail with a character hiding on a snowy tree from monstrous reindeer and creatures',
+      contrastFocus: 'Snow palette + Creature lineup',
+      whatsappPrompt:
+        'Hi! I liked the "Day 99" (Roblox) thumbnail. I want a survival cover in this style.',
+    },
+    'minecraft-arcane-frontier': {
+      title: 'Project: Arcane Frontier',
+      categoryLabel: 'Minecraft',
+      alt: 'Minecraft thumbnail with a pink-haired hero holding an ice sword between a shadow knight and a fire warrior',
+      contrastFocus: 'Purple/orange split + Magic glow',
+      whatsappPrompt:
+        'Hi! I liked the "Project: Arcane Frontier" (Minecraft) thumbnail. I want a modded cover in this style.',
+    },
+    'gaming-living-village': {
+      title: 'The Living Village',
+      categoryLabel: 'Gaming',
+      alt: 'Gaming thumbnail with a shocked creator next to a Minecraft house with glowing eyes and a mouth full of teeth',
+      contrastFocus: 'Face reaction + Night glow',
+      whatsappPrompt:
+        'Hi! I liked the "The Living Village" (Gaming) thumbnail. I want a horror cover in this style.',
+    },
+    'roblox-supreme-egg': {
+      title: 'The Supreme Egg',
+      categoryLabel: 'Roblox',
+      alt: 'Roblox thumbnail with a character facing a giant thorny green egg weighing "999,659,931 KG"',
+      contrastFocus: 'Rainbow title + Toxic green glow',
+      whatsappPrompt:
+        'Hi! I liked the "The Supreme Egg" (Roblox) thumbnail. I want a simulator cover in this style.',
+    },
+    'minecraft-dino-rider': {
+      title: 'The Dino Rider',
+      categoryLabel: 'Minecraft',
+      alt: 'Minecraft thumbnail with a spear-wielding character riding a giant armored dinosaur under a full moon',
+      contrastFocus: 'Moonlit rim + Dynamic angle',
+      whatsappPrompt:
+        'Hi! I liked the "The Dino Rider" (Minecraft) thumbnail. I want an adventure cover in this style.',
     },
     'roblox-toxic-foot-monster': {
       title: 'Toxic Sewer Monster',
@@ -219,45 +299,93 @@ export const en: TranslationDictionary = {
       whatsappPrompt:
         'Hi! I liked the "Toxic Sewer Monster" (Roblox) thumbnail. I want a cover in this cartoonish style.',
     },
-    'roblox-giant-baby-daycare': {
-      title: 'Chaotic Giant Baby Daycare',
+    'gaming-brick-pit': {
+      title: 'Swimming in Bricks',
+      categoryLabel: 'Gaming',
+      alt: 'Gaming thumbnail with a cheering minifigure emerging from a sea of colourful toy bricks',
+      contrastFocus: 'Bright primaries + Joyful pose',
+      whatsappPrompt:
+        'Hi! I liked the "Swimming in Bricks" (Gaming) thumbnail. I want a fun cover in this style.',
+    },
+    'roblox-supermarket-hide': {
+      title: 'Hiding in the Supermarket',
       categoryLabel: 'Roblox',
-      alt: 'Roblox thumbnail with a giant baby in the center holding two crying characters with glow effects and green smoke',
-      contrastFocus: 'Central pyramid + Extreme size contrast',
+      alt: 'Roblox thumbnail with a character hiding behind toilet paper while guards with flashlights search the aisles',
+      contrastFocus: 'Depth of field + Flashlight tension',
       whatsappPrompt:
-        'Hi! I liked the "Chaotic Giant Baby Daycare" (Roblox) thumbnail. I want to make a humor/adventure cover.',
+        'Hi! I liked the "Hiding in the Supermarket" (Roblox) thumbnail. I want a hide-and-seek cover in this style.',
     },
-    'minecraft-secret-fanboy': {
-      title: 'The Secret Fanboy in the Dungeon',
+    'minecraft-monster-squad': {
+      title: 'The Monster Squad',
       categoryLabel: 'Minecraft',
-      alt: 'Minecraft thumbnail featuring a dramatic roleplay scene in a stone dungeon with contrasting red hearts',
-      contrastFocus: 'Instant storytelling without relying on long text',
+      alt: 'Minecraft thumbnail with an armed character among horror creatures in a sandstorm',
+      contrastFocus: 'Dusty haze + Creature silhouettes',
       whatsappPrompt:
-        'Hi! I liked "The Secret Fanboy in the Dungeon" (Minecraft) thumbnail. I want to order a story cover.',
+        'Hi! I liked the "The Monster Squad" (Minecraft) thumbnail. I want a horror cover in this style.',
     },
-    'roblox-hospital-nightmare': {
-      title: 'Hospital Nightmare',
+    'gaming-red-eyes': {
+      title: 'Red Eyes in the Forest',
+      categoryLabel: 'Gaming',
+      alt: 'Gaming thumbnail with three frightened creators peeking out as a red-eyed tree monster lunges at them',
+      contrastFocus: 'Group reaction + Glowing eyes',
+      whatsappPrompt:
+        'Hi! I liked the "Red Eyes in the Forest" (Gaming) thumbnail. I want a horror cover in this style.',
+    },
+    'roblox-forbidden-pit': {
+      title: 'The Forbidden Pit',
       categoryLabel: 'Roblox',
-      alt: 'Hospital horror Roblox thumbnail with emergency yellow lighting and dramatic contrast',
-      contrastFocus: 'Warm/cool clinical lighting + Frame tension',
+      alt: 'Roblox thumbnail with a character peering into a stone pit where a glowing blue creature lurks',
+      contrastFocus: 'Top-down framing + Blue glow focus',
       whatsappPrompt:
-        'Hi! I liked the "Hospital Nightmare" (Roblox) thumbnail. I want a cover in this suspenseful direction.',
+        'Hi! I liked the "The Forbidden Pit" (Roblox) thumbnail. I want a mystery cover in this style.',
     },
-    'minecraft-grimace-park': {
-      title: 'Minecraft Park Hangout',
+    'minecraft-100-days-zombies': {
+      title: '100 Days of Zombies',
       categoryLabel: 'Minecraft',
-      alt: 'Minecraft thumbnail in a sunny park with three characters arranged in depth perspective',
-      contrastFocus: 'Three-plane depth + Saturated colors',
+      alt: 'Minecraft Hardcore thumbnail with a shotgun-wielding character surrounded by red-eyed zombies',
+      contrastFocus: 'Red-eye accents + Crowd pressure',
       whatsappPrompt:
-        'Hi! I liked the "Minecraft Park Hangout" thumbnail. I want to order a cover for a series.',
+        'Hi! I liked the "100 Days of Zombies" (Minecraft) thumbnail. I want a 100-days cover in this style.',
     },
-    'minecraft-stole-boyfriend': {
-      title: 'Minecraft Love Triangle',
+    'minecraft-pocket-monsters': {
+      title: 'Catching Them All',
       categoryLabel: 'Minecraft',
-      alt: 'Minecraft thumbnail showing a happy couple on the center-left and a crying character on the right with headline text',
-      contrastFocus: 'Left-to-right reading flow + Clear emotional conflict',
+      alt: 'Minecraft thumbnail with blocky versions of popular pocket monsters charging with electric sparks',
+      contrastFocus: 'Warm palette + Character lineup',
       whatsappPrompt:
-        'Hi! I liked the "Minecraft Love Triangle" thumbnail. I want a roleplay cover focused on expression.',
+        'Hi! I liked the "Catching Them All" (Minecraft) thumbnail. I want a modded cover in this style.',
+    },
+    'minecraft-infinite-hearts': {
+      title: 'Infinite Hearts',
+      categoryLabel: 'Minecraft',
+      alt: 'Minecraft thumbnail with a glowing pink-armored warrior wielding enchanted weapons in front of a wall of hearts',
+      contrastFocus: 'Pattern background + Electric glow',
+      whatsappPrompt:
+        'Hi! I liked the "Infinite Hearts" (Minecraft) thumbnail. I want a challenge cover in this style.',
+    },
+    'minecraft-casket-of-reveries': {
+      title: 'The Casket of Reveries',
+      categoryLabel: 'Minecraft',
+      alt: 'Minecraft thumbnail with a white-armored hero facing a towering neon-pink glyph golem',
+      contrastFocus: 'Neon pink + Size contrast',
+      whatsappPrompt:
+        'Hi! I liked the "The Casket of Reveries" (Minecraft) thumbnail. I want a modded cover in this style.',
+    },
+    'minecraft-100-players': {
+      title: '100 Players Hardcore',
+      categoryLabel: 'Minecraft',
+      alt: 'Minecraft Hardcore thumbnail with gas-masked soldiers in a wasteland under a nuclear explosion',
+      contrastFocus: 'Apocalyptic palette + Squad framing',
+      whatsappPrompt:
+        'Hi! I liked the "100 Players Hardcore" (Minecraft) thumbnail. I want an event cover in this style.',
+    },
+    'minecraft-legendary-birds': {
+      title: 'The Legendary Birds',
+      categoryLabel: 'Minecraft',
+      alt: 'Minecraft thumbnail with a character in a suit flanked by fire, ice and lightning legendary birds',
+      contrastFocus: 'Tri-colour elements + Symmetry',
+      whatsappPrompt:
+        'Hi! I liked the "The Legendary Birds" (Minecraft) thumbnail. I want a modded cover in this style.',
     },
   },
 };
