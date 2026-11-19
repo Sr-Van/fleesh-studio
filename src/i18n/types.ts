@@ -92,8 +92,6 @@ export interface TranslationDictionary {
   };
   gallery: {
     eyebrow: string;
-    headingLead: string;
-    headingAccent: string;
     description: string;
     filtersAria: string;
     filterAll: string;
@@ -111,9 +109,6 @@ export interface TranslationDictionary {
     };
   };
   contact: {
-    headingLine1: string;
-    headingLine2Prefix: string;
-    headingLine2Accent: string;
     behanceValue: string;
     copiedLabel: string;
     footerTag: string;

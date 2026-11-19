@@ -1,6 +1,6 @@
 ---
 import Icon from './Icon.astro';
-import { getPortfolioItems, STUDIO_INFO } from '../data/siteData';
+import { getPortfolioItems } from '../data/siteData';
 import { getTranslations, type Locale } from '../i18n';
 
 interface Props {
@@ -38,9 +38,7 @@ const lightboxData = portfolioItems.map((i, idx) => ({
     <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
       <div>
         <p data-reveal class="font-mono text-xs uppercase tracking-[0.2em] text-flame-500 glow">{t.gallery.eyebrow}</p>
-        <h2 data-reveal="mask" class="mt-4 font-display font-extrabold tracking-[-0.04em] leading-[0.92] text-[clamp(2.4rem,9vw,5.5rem)]">
-          {t.gallery.headingLead}<span class="font-serif italic font-normal chrome-text">{t.gallery.headingAccent}</span>
-        </h2>
+        <h2 class="sr-only">{t.header.links.gallery}</h2>
       </div>
       <p data-reveal class="max-w-sm text-ink-200 leading-relaxed" style="--d:120ms">
         {t.gallery.description}
@@ -112,15 +110,6 @@ const lightboxData = portfolioItems.map((i, idx) => ({
         </li>
       ))}
     </ul>
-
-    <div data-reveal class="mt-14 flex flex-wrap items-center gap-3 text-sm">
-      <span class="text-ink-400">{t.gallery.behancePrefix}</span>
-      {STUDIO_INFO.behanceCollections.map((c) => (
-        <a href={c.url} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 min-h-[40px] px-3.5 rounded-full border border-white/10 text-ink-50 hover:border-flame-500 transition-colors">
-          {c.label} <Icon name="arrow-up-right" class="w-3.5 h-3.5" />
-        </a>
-      ))}
-    </div>
   </div>
 </section>
 

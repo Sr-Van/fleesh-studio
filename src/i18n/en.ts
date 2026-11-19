@@ -55,8 +55,6 @@ export const en: TranslationDictionary = {
   },
   gallery: {
     eyebrow: '✦ Permanent exhibition',
-    headingLead: 'The living',
-    headingAccent: ' gallery.',
     description:
       'Twenty-two artworks built to command attention in the feed. Tap any piece to view it fullscreen and see the craft behind it.',
     filtersAria: 'Filter artworks by game',
@@ -75,9 +73,6 @@ export const en: TranslationDictionary = {
     },
   },
   contact: {
-    headingLine1: "Let's create",
-    headingLine2Prefix: 'something ',
-    headingLine2Accent: 'unreal.',
     behanceValue: 'Full portfolio',
     copiedLabel: 'copied ✦',
     footerTag: '✦ made in 16:9 ✦',

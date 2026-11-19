@@ -55,8 +55,6 @@ export const pt: TranslationDictionary = {
   },
   gallery: {
     eyebrow: '✦ Exposição permanente',
-    headingLead: 'A galeria',
-    headingAccent: ' viva.',
     description:
       'Vinte e duas obras feitas para disputar atenção no feed. Toque em qualquer uma para ver em tela cheia e a técnica por trás.',
     filtersAria: 'Filtrar obras por jogo',
@@ -75,9 +73,6 @@ export const pt: TranslationDictionary = {
     },
   },
   contact: {
-    headingLine1: 'Vamos criar',
-    headingLine2Prefix: 'algo ',
-    headingLine2Accent: 'absurdo.',
     behanceValue: 'Portfólio completo',
     copiedLabel: 'copiado ✦',
     footerTag: '✦ made in 16:9 ✦',
