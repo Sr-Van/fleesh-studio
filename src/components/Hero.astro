@@ -20,7 +20,6 @@ const sparkles = [
 ---
 
 <section id="topo" class="relative isolate min-h-[100svh] flex flex-col items-center justify-center overflow-hidden px-4 pt-24 pb-16 text-center">
-  <div aria-hidden="true" class="absolute left-1/2 top-1/2 -z-10 w-[80vmin] h-[80vmin] -translate-x-1/2 -translate-y-1/2 rounded-full bg-flame-500/25 blur-[110px]"></div>
 
   {sparkles.map((s) => (
     <img
@@ -41,6 +40,8 @@ const sparkles = [
 
   <h1 class="relative mt-4 w-full mx-auto max-w-[min(820px,100%,calc((100svh-260px)*1.336))]" data-logo-tilt>
     <span class="sr-only">Fleesh Studios</span>
+    <!-- Brilho roxo preso à logo: termina antes do "Entrar" para não vazar na próxima seção -->
+    <div aria-hidden="true" class="absolute -inset-x-[10%] top-0 bottom-0 -z-10 pointer-events-none bg-[radial-gradient(closest-side,rgba(131,88,255,0.22),rgba(131,88,255,0.08)_60%,transparent)]"></div>
     <div class="logo-enter">
       <div class="logo-float relative">
         <img
@@ -52,7 +53,7 @@ const sparkles = [
           alt=""
           fetchpriority="high"
           decoding="async"
-          class="w-full h-auto drop-shadow-[0_0_40px_rgba(131,88,255,0.45)]"
+          class="w-full h-auto drop-shadow-[0_0_24px_rgba(131,88,255,0.3)]"
         />
       </div>
     </div>

@@ -295,7 +295,7 @@ dialog.lightbox[open] .lb-stage { animation: lb-in 520ms var(--ease-out) both; }
   position: fixed; inset: 0; z-index: -10; pointer-events: none;
   background: #050506 var(--lqip) center top / cover no-repeat;
 }
-.space-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center top; opacity: .7; transition: opacity 1.2s var(--ease-out); }
-.space-bg::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 30%, transparent 30%, rgba(5,5,6,.85) 100%); }
+.space-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center top; opacity: .6; transition: opacity 1.2s var(--ease-out); }
+.space-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(5,5,6,.75) 100%), radial-gradient(ellipse at 50% 30%, transparent 30%, rgba(5,5,6,.85) 100%); }
 
 .y2k-border { border: 1px solid rgba(255,255,255,.14); box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 0 0 1px rgba(131,88,255,.08); }

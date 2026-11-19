@@ -30,7 +30,7 @@ export const en: TranslationDictionary = {
     langSwitcherAria: 'Language selector',
   },
   hero: {
-    eyebrow: '✦ Thumbnail art · Roblox · Minecraft · Variety ✦',
+    eyebrow: '✦ Minecraft · Roblox · Gaming · Variety ✦',
     subtitle: 'The best way to hype up your videos.',
     cta: 'Enter',
   },
